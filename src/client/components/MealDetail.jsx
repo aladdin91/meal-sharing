@@ -45,45 +45,45 @@ function MealDetail() {
         {reservationsList.length >= 1 ? (
           <>
             <div className="meal-card">
-              {reservationsList[0]?.title === null ? (
+              {reservationsList[0].title === null ? (
                 <h3>Title: not available</h3>
               ) : (
                 <h3>Meal: {reservationsList[0]?.title}</h3>
               )}
-              {reservationsList[0]?.description === null ? (
+              {reservationsList[0].description === null ? (
                 <p>Description: not available</p>
               ) : (
                 <p>Description: {reservationsList[0]?.description}</p>
               )}
-              {reservationsList[0]?.price === null ? (
+              {reservationsList[0].price === null ? (
                 <p>Price: not available</p>
               ) : (
                 <p>Price: {reservationsList[0]?.price} DKK</p>
               )}
-              {reservationsList[0]?.max_reservation === null ? (
+              {reservationsList[0].max_reservation === null ? (
                 <p>Max reservation: not available</p>
               ) : (
                 <p>Max reservation: {reservationsList[0]?.max_reservation}</p>
               )}
-              {reservationsList[0]?.location === null ? (
+              {reservationsList[0].location === null ? (
                 <p>Location: not available</p>
               ) : (
                 <p>Location: {reservationsList[0]?.location}</p>
               )}
-              {reservationsList[0]?.total_guests === null ? (
+              {reservationsList[0].total_guests === null ? (
                 <p>number Of Guests: not available </p>
               ) : (
                 <p>number Of Guests: {reservationsList[0]?.total_guests}</p>
               )}
               <p>
                 {" "}
-                Reservation left:{" "}
-                {reservationsList[0]?.max_reservation -
-                  reservationsList[0]?.total_guests}
+                Reservation left:
+                {reservationsList[0].max_reservation -
+                  reservationsList[0].total_guests}
               </p>
             </div>
-            {reservationsList[0]?.max_reservation <=
-            reservationsList[0]?.total_guests ? (
+            {reservationsList[0].max_reservation <=
+            reservationsList[0].total_guests ? (
               <p>sorry, no seat available</p>
             ) : (
               <div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function SortMenu({ onSortChange }) {
+function SortMeal({ onSortChange }) {
   const [sortKey, setSortKey] = useState("");
 
   const handleSortKeyChange = (event) => {
@@ -30,4 +30,4 @@ function SortMenu({ onSortChange }) {
   );
 }
 
-export default SortMenu;
+export default SortMeal;

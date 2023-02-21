@@ -19,7 +19,6 @@ function MealContextProvider({ children }) {
     }
   }, []);
 
-  console.log(meals);
   return (
     <MealContext.Provider value={{ meals, setMeals }}>
       {children}

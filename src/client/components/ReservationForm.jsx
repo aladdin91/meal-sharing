@@ -43,8 +43,8 @@ const ReservationForm = ({ reservationsList, id }) => {
         <input
           min="1"
           max={
-            reservationsList[0]?.max_reservation -
-            reservationsList[0]?.total_guests
+            reservationsList[0].max_reservation -
+            reservationsList[0].total_guests
           }
           type="number"
           id="number_of_guests"

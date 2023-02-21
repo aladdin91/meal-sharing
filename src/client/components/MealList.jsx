@@ -4,7 +4,7 @@ import Meal from "./Meal";
 import { MealContext } from "./MealContext";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import SortMenu from "./SortMenu";
+import SortMeal from "./SortMeal";
 
 function MealList() {
   const { meals } = useContext(MealContext);
@@ -53,7 +53,7 @@ function MealList() {
       <Navbar />
       <SearchMeals />
       <h2>List of meals</h2>
-      <SortMenu onSortChange={handleSortChange} />
+      <SortMeal onSortChange={handleSortChange} />
       <div className="container">{sortedMealList}</div>
       <Footer />
     </div>
