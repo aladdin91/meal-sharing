@@ -72,8 +72,11 @@ router.get("/:meal_id/reviews", async (req, res) => {
         res.json(reviewById);
     } catch (error) {
         throw error;
+    }
+});
+
 // Returns all meals
-router.get('/', async(req, res) => {
+router.get('/', async (req, res) => {
     try {
         const all_meals = await knex.select('*').from('meal');
         all_meals.length === 0 ?
@@ -88,7 +91,7 @@ router.get('/', async(req, res) => {
 
 
 // Adds a new meal to the database
-router.post('/', async(req, res) => {
+router.post('/', async (req, res) => {
     try {
         const new_meal = req.body;
         await knex('meal').insert(new_meal)
@@ -101,7 +104,7 @@ router.post('/', async(req, res) => {
 
 
 // Returns the meal by id
-router.get('/:id', async(req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const mail_id = await knex('meal')
@@ -117,7 +120,7 @@ router.get('/:id', async(req, res) => {
 });
 
 // Updates the meal by id
-router.put('/:id', async(req, res) => {
+router.put('/:id', async (req, res) => {
     try {
         const id = req.params.id;
         await knex('meal')
@@ -133,7 +136,7 @@ router.put('/:id', async(req, res) => {
 
 // Deletes the meal by id
 
-router.delete('/:id', async(req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const deletedRows = await knex('meal').where({ id: id }).del();
