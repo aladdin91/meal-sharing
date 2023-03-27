@@ -149,4 +149,20 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
+router.get('/:id/reservation', async (req, res) => {
+    const id = req.params.id;
+    try {
+        const totalGuests = await knex('meal')
+            .join('reservation', 'meal.id', '=', 'reservation.meal_id')
+            .select('meal.id', 'meal.title', knex.raw('SUM(reservation.number_of_guests) as total_guests'))
+            .where('meal.id', id)
+            .groupBy('meal.id', 'meal.title');
+        res.json(totalGuests[0]);
+    } catch (error) {
+        throw error;
+    }
+});
+
+
+
 module.exports = router;

@@ -1,52 +1,105 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
-@import 'theme.css';
-* {
-  font-family: 'Montserrat', sans-serif;
-  box-sizing: border-box;
-}
-
 #root {
-  padding-left: 30%;
-  padding-right: 30%;
-  height: 100vh;
+  padding: 10px;
+}
+h2 {
+  display: flex;
+  justify-content: center;
 }
 
-body {
-  margin: 0;
-  font-size: 17px;
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  margin: 5px;
+}
+.meal-card {
+  border: solid 1px black;
+  border-radius: 10px;
+  width: 27%;
+  padding: 10px;
+  margin: 5px;
+  min-width: 200px;
+  max-width: 200px;
+}
+.navLink,
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #007bff;
+  transition: background-color 0.3s ease-in-out;
+  cursor: pointer;
+  color: white;
+}
+.btn {
+  border: none;
+  margin: 10px;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.navLink:hover,
+.btn:hover {
+  background-color: #0062cc;
 }
 
+.nav {
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  justify-content: space-around;
+}
 a {
   text-decoration: none;
-  color: #2d3233;
+  color: #fff;
+}
+.footerContainer {
+  margin-top: 20px;
+  border: solid 1px black;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+}
+.footerIcon {
+  display: flex;
+  font-size: 30px;
+  width: 50%;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.meal-title {
+  color: black;
 }
 
-button {
-  background-color: #3e99c0;
-  border-radius: 8px;
-  border-width: 0px;
-  font-weight: 295;
-  color: rgb(255, 255, 255);
-  padding: 5px;
-  font-size: 17px;
+.meal-cont {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.form-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid 1px black;
+  border-radius: 10px;
+  padding: 10px;
 }
 
-@media screen and (max-width: 1400px) {
-  #root {
-    padding-left: 30%;
-    padding-right: 30%;
-  }
+.reviews-container,
+p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
-
-@media screen and (max-width: 750px) {
-  #root {
-    padding-left: 0;
-    padding-right: 0;
-  }
+span {
+  font-size: 15px;
+}
+.reciew-form {
+  display: flex;
+  flex-direction: column;
+}
+.meal-title {
+  text-align: center;
 }
