@@ -5,7 +5,6 @@ const path = require("path");
 const knex = require("./database");
 
 const mealsRouter = require("./api/meals");
-const reservationsRouter = require("./api/reservations");
 const reviewsRouter = require("./api/reviews");
 const reservationsRouter = require('./api/reservations');
 
