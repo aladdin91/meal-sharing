@@ -30,7 +30,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-
 router.get('/', async (req, res) => {
   try {
     const all_reservation = await knex.select('*').from('reservation');
