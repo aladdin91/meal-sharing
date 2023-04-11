@@ -24,9 +24,11 @@ function MealList() {
     <div>
       <h2>List of meals</h2>
       <div className="continer">
-        {meals.map((meal) => (
-          <Meal key={meal.id} meal={meal} />
-        ))}
+        {meals.length > 0 ? (
+          meals.map((meal) => <Meal key={meal.id} meal={meal} />)
+        ) : (
+          <p>Loading meals...</p>
+        )}
       </div>
     </div>
   );
