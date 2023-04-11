@@ -1,10 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
+import img from "../assets/images/food.png";
 
 function Meal({ meal }) {
   return (
     <div className="meal-card">
+      <img className="food-img" src={img} alt="food imege" />
       {meal.title === null ? (
         <h3>Title: not available</h3>
       ) : (

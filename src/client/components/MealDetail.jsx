@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
-// import { MealContext } from "./MealContext";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ShowReviews from "./ShowReviews";
@@ -10,8 +9,6 @@ const mealsUrl = process.env.REACT_APP_MEALS_URL;
 
 function MealDetail() {
   const { id } = useParams();
-  // const { meals } = useContext(MealContext);
-  // const meal = meals.find((meal) => meal.id === Number(id));
 
   const [reservationsList, setReservationsList] = useState([]);
   const [mealReview, setMealReview] = useState([]);

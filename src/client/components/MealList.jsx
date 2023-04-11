@@ -32,7 +32,6 @@ function MealList() {
         return 0;
       }
     };
-    console.log(meals);
     const sorted = [...meals].sort(sortFunction);
     setSortedMeals(sorted);
   }, [meals, sortOption]);

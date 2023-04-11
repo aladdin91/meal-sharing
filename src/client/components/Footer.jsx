@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
   faTwitter,
-  faGitHub,
   faDiscord,
 } from "@fortawesome/free-brands-svg-icons";
 function Footer() {
