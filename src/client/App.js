@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MealList from "./components/MealList";
-import TestComponent from "./components/TestComponent/TestComponent";
 
 function App() {
   return (
@@ -13,7 +12,6 @@ function App() {
         <MealList />
       </Route>
       <Route exact path="/test-component">
-        <TestComponent></TestComponent>
       </Route>
     </Router>
   );
