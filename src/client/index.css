@@ -14,13 +14,20 @@ h2 {
   margin: 5px;
 }
 .meal-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   border: solid 1px black;
   border-radius: 10px;
   width: 27%;
-  padding: 10px;
   margin: 5px;
-  min-width: 200px;
-  max-width: 200px;
+  min-width: 220px;
+  max-width: 250px;
+}
+.meal-card:hover {
+  border: none;
+  box-shadow: 1px 2px 3px 4px rgba(12, 12, 12, 0.2);
 }
 .navLink,
 .btn {
@@ -42,17 +49,29 @@ h2 {
   background-color: #0062cc;
 }
 
-.nav {
+.nav-ul {
+  width: 50%;
   display: flex;
-  justify-content: space-between;
-  color: #fff;
   justify-content: space-around;
+  color: #fff;
+  font-size: 15px;
 }
 a {
   text-decoration: none;
   color: #fff;
 }
-.footerContainer {
+
+.nav-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.logo {
+  font-size: 25px;
+  cursor: pointer;
+  font-family: "Righteous", cursive;
+}
+.footer-container {
   margin-top: 20px;
   border: solid 1px black;
   height: 100px;
@@ -61,7 +80,11 @@ a {
   align-items: center;
   border-radius: 10px;
 }
-.footerIcon {
+.food-img {
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+}
+.footer-icon {
   display: flex;
   font-size: 30px;
   width: 50%;
@@ -70,6 +93,7 @@ a {
 }
 .meal-title {
   color: black;
+  text-align: center;
 }
 
 .meal-cont {
@@ -96,10 +120,21 @@ p {
 span {
   font-size: 15px;
 }
-.reciew-form {
+.review-form {
   display: flex;
+  align-items: center;
   flex-direction: column;
 }
-.meal-title {
+
+.search-input {
+  width: 80%;
+  height: 25px;
+}
+
+.search-input-container {
+  display: flex;
+  justify-content: center;
+}
+.result-title {
   text-align: center;
 }

@@ -32,8 +32,6 @@ router.get('/meal/:id', async (req, res) => {
   }
 })
 
-
-
 // Adds a new review to the database.
 router.post('/', async (req, res) => {
   try {

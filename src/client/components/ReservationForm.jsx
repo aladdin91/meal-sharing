@@ -1,18 +1,12 @@
-import React, { useState, useContext } from "react";
-import { MealContext } from "./MealContext";
+import React, { useState } from "react";
+
 import Button from "./Button";
 const mealsUrl = process.env.REACT_APP_MEALS_URL;
 
-const ReservationForm = ({
-  mealId,
-  max_reservation,
-  reservationsList,
-  onSubmit,
-}) => {
+const ReservationForm = ({ reservationsList, id }) => {
   const [postReservation, setPostReservation] = useState({
-    id: "",
     number_of_guests: "",
-    meal_id: mealId,
+    meal_id: id,
     created_date: "",
     contact_phonenumber: "",
     contact_name: "",
@@ -20,9 +14,6 @@ const ReservationForm = ({
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const { meals } = useContext(MealContext);
-
-  const meal = meals.find((meal) => meal.id === Number(mealId));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,7 +23,7 @@ const ReservationForm = ({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ meal_id: mealId, ...postReservation }),
+        body: JSON.stringify(postReservation),
       });
       if (!response.ok) {
         throw new Error("Failed to create reservation");
@@ -48,26 +39,12 @@ const ReservationForm = ({
   return (
     <>
       <form className="form-card" onSubmit={handleSubmit}>
-        {/* i have to incloud id because the database does not increse the
-        value, i will fix it later :) */}
-        <label htmlFor="reservation-id">id</label>
-        <input
-          type="number"
-          id="reservation-id"
-          value={postReservation.id}
-          onChange={(event) =>
-            setPostReservation({
-              ...postReservation,
-              id: event.target.value,
-            })
-          }
-          required
-        />
         <label htmlFor="number_of_guests">number of guests</label>
         <input
           min="1"
           max={
-            Number(meal.max_reservation - reservationsList.total_guests) || ""
+            reservationsList[0]?.max_reservation -
+            reservationsList[0]?.total_guests
           }
           type="number"
           id="number_of_guests"
@@ -80,19 +57,7 @@ const ReservationForm = ({
           }
           required
         />
-        <label htmlFor="meal_id">meal id</label>
-        <input
-          type="number"
-          id="meal_id"
-          value={postReservation.meal_id}
-          onChange={(event) =>
-            setPostReservation({
-              ...postReservation,
-              meal_id: event.target.value,
-            })
-          }
-          required
-        />
+
         <label htmlFor="created_date">created date</label>
         <input
           type="date"

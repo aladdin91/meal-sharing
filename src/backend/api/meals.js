@@ -153,16 +153,28 @@ router.get('/:id/reservation', async (req, res) => {
     const id = req.params.id;
     try {
         const totalGuests = await knex('meal')
-            .join('reservation', 'meal.id', '=', 'reservation.meal_id')
-            .select('meal.id', 'meal.title', knex.raw('SUM(reservation.number_of_guests) as total_guests'))
+            .leftJoin('reservation', 'meal.id', '=', 'reservation.meal_id')
+            .select('meal.id', 'meal.title', 'meal.description', 'meal.location', 'max_reservation', 'meal.price', knex.raw('SUM(reservation.number_of_guests) as total_guests'))
             .where('meal.id', id)
             .groupBy('meal.id', 'meal.title');
-        res.json(totalGuests[0]);
+        res.json(totalGuests);
     } catch (error) {
         throw error;
     }
 });
 
+router.get('/meals/details', async (req, res) => {
+    try {
+        const totalGuests = await knex('meal')
+            .leftJoin('reservation', 'meal.id', '=', 'reservation.meal_id')
+            .select('meal.id', 'meal.title', 'meal.description', 'meal.max_reservation', 'meal.location', 'meal.when', 'meal.price', knex.raw('SUM(reservation.number_of_guests) as total_guests'))
+            .groupBy('meal.id', 'meal.title');
+        res.json(totalGuests);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 
 module.exports = router;

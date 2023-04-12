@@ -1,20 +1,17 @@
 import React, { useState, useContext } from "react";
-import { MealContext } from "./MealContext";
+
 import Button from "./Button";
 const mealsUrl = process.env.REACT_APP_MEALS_URL;
-const PostReviewForm = ({ mealId }) => {
+const PostReviewForm = ({ id }) => {
   const [postReviewForm, setPostReviewForm] = useState({
-    id: "",
     title: "",
-    meal_id: mealId,
+    meal_id: id,
     description: "",
     created_date: "",
     stars: "",
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const { meals } = useContext(MealContext);
-  const meal = meals.find((meal) => meal.id === Number(mealId));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,14 +21,16 @@ const PostReviewForm = ({ mealId }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ meal_id: mealId, ...postReviewForm }),
+        body: JSON.stringify(postReviewForm),
       });
       if (!response.ok) {
         throw new Error("Failed to post review");
       }
       setSuccess(true);
+      setError(null);
       alert("Review posted successfully!");
     } catch (err) {
+      setSuccess(false);
       setError(err.message);
       alert(`Error: ${err.message}`);
     }
@@ -40,38 +39,10 @@ const PostReviewForm = ({ mealId }) => {
   return (
     <>
       <form className="form-card" onSubmit={handleSubmit}>
-        {/* i have to incloud id because the database does not increse the
-        value, i will fix it later :) */}
-        <label htmlFor="revew-id">id</label>
-        <input
-          type="number"
-          id="review-id"
-          value={postReviewForm.id}
-          onChange={(event) =>
-            setPostReviewForm({
-              ...postReviewForm,
-              id: event.target.value,
-            })
-          }
-          required
-        />
-        <label htmlFor="meal-id">meal-id</label>
-        <input
-          type="number"
-          id="meal-id"
-          value={postReviewForm.meal_id}
-          onChange={(event) =>
-            setPostReviewForm({
-              ...postReviewForm,
-              meal_id: event.target.value,
-            })
-          }
-          required
-        />
         <label htmlFor="created-date">created date</label>
         <input
           type="date"
-          id="name"
+          id="created-date"
           value={postReviewForm.created_date}
           onChange={(event) =>
             setPostReviewForm({

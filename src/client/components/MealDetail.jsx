@@ -1,6 +1,5 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { MealContext } from "./MealContext";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ShowReviews from "./ShowReviews";
@@ -10,8 +9,6 @@ const mealsUrl = process.env.REACT_APP_MEALS_URL;
 
 function MealDetail() {
   const { id } = useParams();
-  const { meals } = useContext(MealContext);
-  const meal = meals.find((meal) => meal.id === Number(id));
 
   const [reservationsList, setReservationsList] = useState([]);
   const [mealReview, setMealReview] = useState([]);
@@ -40,58 +37,57 @@ function MealDetail() {
       console.error(err);
     }
   }, []);
+
   return (
     <div>
       <Navbar />
       <div className="meal-cont">
-        {meal ? (
+        {reservationsList.length >= 1 ? (
           <>
             <div className="meal-card">
-              {meal.title === null ? (
+              {reservationsList[0]?.title === null ? (
                 <h3>Title: not available</h3>
               ) : (
-                <h3>Meal: {meal.title}</h3>
+                <h3>Meal: {reservationsList[0]?.title}</h3>
               )}
-              {meal.description === null ? (
+              {reservationsList[0]?.description === null ? (
                 <p>Description: not available</p>
               ) : (
-                <p>Description: {meal.description}</p>
+                <p>Description: {reservationsList[0]?.description}</p>
               )}
-              {meal.price === null ? (
+              {reservationsList[0]?.price === null ? (
                 <p>Price: not available</p>
               ) : (
-                <p>Price: {meal.price} DKK</p>
+                <p>Price: {reservationsList[0]?.price} DKK</p>
               )}
-              {meal.max_reservation === null ? (
+              {reservationsList[0]?.max_reservation === null ? (
                 <p>Max reservation: not available</p>
               ) : (
-                <p>Max reservation: {meal.max_reservation}</p>
+                <p>Max reservation: {reservationsList[0]?.max_reservation}</p>
               )}
-              {meal.location === null ? (
+              {reservationsList[0]?.location === null ? (
                 <p>Location: not available</p>
               ) : (
-                <p>Location: {meal.location}</p>
+                <p>Location: {reservationsList[0]?.location}</p>
               )}
-              {reservationsList.total_guests === null ? (
-                <p>number Of Guests: not available</p>
+              {reservationsList[0]?.total_guests === null ? (
+                <p>number Of Guests: not available </p>
               ) : (
-                <p>number Of Guests: {reservationsList.total_guests}</p>
+                <p>number Of Guests: {reservationsList[0]?.total_guests}</p>
               )}
               <p>
-                Reservation left:
-                {meal.max_reservation - reservationsList.total_guests}
+                {" "}
+                Reservation left:{" "}
+                {reservationsList[0]?.max_reservation -
+                  reservationsList[0]?.total_guests}
               </p>
             </div>
-            {meal.max_reservation <= reservationsList.total_guests ? (
+            {reservationsList[0]?.max_reservation <=
+            reservationsList[0]?.total_guests ? (
               <p>sorry, no seat available</p>
             ) : (
               <div>
-                <ReservationForm
-                  meal={meal}
-                  mealId={meal.id}
-                  max_reservation={meal.max_reservation}
-                  reservationsList={reservationsList}
-                />
+                <ReservationForm id={id} reservationsList={reservationsList} />
               </div>
             )}
           </>
@@ -101,13 +97,21 @@ function MealDetail() {
       </div>
 
       <div className="reviews-container">
-        <h2>Reviws</h2>
-        {mealReview.map((review) => (
-          <ShowReviews key={review.id} review={review} />
-        ))}
+        <div className="reviews-details">
+          <h2>Reviews</h2>
+          {mealReview.message ? (
+            <p>no reviews found for this meal</p>
+          ) : (
+            <div className="reviews-details">
+              {mealReview.map((review) => (
+                <ShowReviews key={review.id} review={review} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
       <div className="review-form">
-        <PostReviewForm mealId={id} />
+        <PostReviewForm id={id} />
       </div>
       <Footer />
     </div>
