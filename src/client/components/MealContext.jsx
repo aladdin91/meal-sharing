@@ -9,7 +9,7 @@ function MealContextProvider({ children }) {
   useEffect(() => {
     try {
       async function fetchMeals() {
-        const response = await fetch(`${mealsUrl}meals/meals/details`);
+        const response = await fetch(`${mealsUrl}meals`);
         const data = await response.json();
         setMeals(data);
       }
@@ -20,9 +20,7 @@ function MealContextProvider({ children }) {
   }, []);
 
   return (
-    <MealContext.Provider value={{ meals, setMeals }}>
-      {children}
-    </MealContext.Provider>
+    <MealContext.Provider value={{ meals }}>{children}</MealContext.Provider>
   );
 }
 export { MealContextProvider, MealContext };

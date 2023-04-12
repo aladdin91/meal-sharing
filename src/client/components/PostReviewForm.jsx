@@ -1,18 +1,20 @@
 import React, { useState, useContext } from "react";
-
+import { MealContext } from "./MealContext";
 import Button from "./Button";
 const mealsUrl = process.env.REACT_APP_MEALS_URL;
-const PostReviewForm = ({ id }) => {
+const PostReviewForm = ({ mealId }) => {
   const [postReviewForm, setPostReviewForm] = useState({
     id: "",
     title: "",
-    meal_id: id,
+    meal_id: mealId,
     description: "",
     created_date: "",
     stars: "",
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const { meals } = useContext(MealContext);
+  const meal = meals.find((meal) => meal.id === Number(mealId));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,7 +24,7 @@ const PostReviewForm = ({ id }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(postReviewForm),
+        body: JSON.stringify({ meal_id: mealId, ...postReviewForm }),
       });
       if (!response.ok) {
         throw new Error("Failed to post review");
@@ -56,7 +58,7 @@ const PostReviewForm = ({ id }) => {
         <label htmlFor="meal-id">meal-id</label>
         <input
           type="number"
-          id="meal_id"
+          id="meal-id"
           value={postReviewForm.meal_id}
           onChange={(event) =>
             setPostReviewForm({
@@ -66,7 +68,6 @@ const PostReviewForm = ({ id }) => {
           }
           required
         />
-
         <label htmlFor="created-date">created date</label>
         <input
           type="date"

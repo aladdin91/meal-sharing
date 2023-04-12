@@ -1,12 +1,18 @@
 import React, { useState, useContext } from "react";
+import { MealContext } from "./MealContext";
 import Button from "./Button";
 const mealsUrl = process.env.REACT_APP_MEALS_URL;
 
-const ReservationForm = ({ reservationsList, id }) => {
+const ReservationForm = ({
+  mealId,
+  max_reservation,
+  reservationsList,
+  onSubmit,
+}) => {
   const [postReservation, setPostReservation] = useState({
     id: "",
     number_of_guests: "",
-    meal_id: id,
+    meal_id: mealId,
     created_date: "",
     contact_phonenumber: "",
     contact_name: "",
@@ -14,6 +20,9 @@ const ReservationForm = ({ reservationsList, id }) => {
   });
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const { meals } = useContext(MealContext);
+
+  const meal = meals.find((meal) => meal.id === Number(mealId));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,7 +32,7 @@ const ReservationForm = ({ reservationsList, id }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(postReservation),
+        body: JSON.stringify({ meal_id: mealId, ...postReservation }),
       });
       if (!response.ok) {
         throw new Error("Failed to create reservation");
@@ -39,6 +48,8 @@ const ReservationForm = ({ reservationsList, id }) => {
   return (
     <>
       <form className="form-card" onSubmit={handleSubmit}>
+        {/* i have to incloud id because the database does not increse the
+        value, i will fix it later :) */}
         <label htmlFor="reservation-id">id</label>
         <input
           type="number"
@@ -56,8 +67,7 @@ const ReservationForm = ({ reservationsList, id }) => {
         <input
           min="1"
           max={
-            reservationsList[0]?.max_reservation -
-            reservationsList[0]?.total_guests
+            Number(meal.max_reservation - reservationsList.total_guests) || ""
           }
           type="number"
           id="number_of_guests"
