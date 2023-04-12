@@ -23,6 +23,7 @@ function Meal({ meal }) {
       <Link to={`/meal/${meal.id}`}>
         <Button title="Reserve meal" />
       </Link>
+
     </div>
   );
 }

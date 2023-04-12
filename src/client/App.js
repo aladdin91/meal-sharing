@@ -9,7 +9,6 @@ import './index.css'
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MealList from "./components/MealList";
-import TestComponent from "./components/TestComponent/TestComponent";
 
 
 function App() {
@@ -36,7 +35,6 @@ function App() {
         <MealList />
       </Route>
       <Route exact path="/test-component">
-        <TestComponent></TestComponent>
       </Route>
     </Router>
   );
