@@ -17,7 +17,20 @@ router.get('/', async (req, res) => {
 })
 
 // Returns all reviews for a specific meal.
-
+router.get('/meal/:id', async (req, res) => {
+  try {
+    const meal_id = req.params.id;
+    const meal_reviews = await knex('review')
+      .select('*')
+      .where('meal_id', meal_id);
+    meal_reviews.length === 0 ?
+      res.json({ "message": " no reviews found for this meal ID" }) :
+      res.json(meal_reviews)
+  } catch (err) {
+    console.error(err);
+    res.status(500).send(err)
+  }
+})
 
 
 

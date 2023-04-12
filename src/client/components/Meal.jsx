@@ -1,12 +1,29 @@
 import React from "react";
-import "./meal.css";
+import { Link } from "react-router-dom";
+import Button from "./Button";
+
 function Meal({ meal }) {
-  const { title, description, price } = meal;
   return (
     <div className="meal-card">
-      <h3>Title: {title}</h3>
-      <p>Description: {description}</p>
-      <p>Price: {price} DKK</p>
+      {meal.title === null ? (
+        <h3>Title: not available</h3>
+      ) : (
+        <h3 className="meal-title">Title: {meal.title}</h3>
+      )}
+      {meal.description === null ? (
+        <p> Description: not available</p>
+      ) : (
+        <p> Description: {meal.description}</p>
+      )}
+      {meal.price === null ? (
+        <p>Price: not available</p>
+      ) : (
+        <p>Price: {meal.price} DKK</p>
+      )}
+      <Link to={`/meal/${meal.id}`}>
+        <Button title="Reserve meal" />
+      </Link>
+
     </div>
   );
 }
