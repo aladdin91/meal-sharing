@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 
-function Meal({ meal }) {
+function SearchResult({ meal }) {
   return (
     <div className="meal-card">
       {meal.title === null ? (
@@ -10,16 +10,12 @@ function Meal({ meal }) {
       ) : (
         <h3 className="meal-title">Title: {meal.title}</h3>
       )}
-      {meal.description === null ? (
-        <p> Description: not available</p>
-      ) : (
-        <p> Description: {meal.description}</p>
-      )}
       {meal.price === null ? (
         <p>Price: not available</p>
       ) : (
         <p>Price: {meal.price} DKK</p>
       )}
+
       <Link to={`/meal/${meal.id}`}>
         <Button title="Reserve meal" />
       </Link>
@@ -27,4 +23,4 @@ function Meal({ meal }) {
   );
 }
 
-export default Meal;
+export default SearchResult;

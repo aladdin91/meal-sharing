@@ -30,17 +30,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
-  try {
-    const all_reservation = await knex.select('*').from('reservation');
-    all_reservation.length === 0 ?
-      res.json({ "message": "no reservation found" }) :
-      res.json(all_reservation);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
-  }
-});
 
 
 
